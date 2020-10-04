@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 export class Navbar extends Component {
   render () {
     return (
-      <div>
-        <h1>navbar</h1>
+      <div className="navbar bg-primary">
+        <h1>
+          <i className="fab fa-github f09b" />
+          navbar
+        </h1>
       </div>
     );
   }
