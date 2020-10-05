@@ -17,7 +17,12 @@ function App (){
   );
 
   async function fetchUsers (){
-    const res = await axios.get('https://api.github.com/users').then((res) => setUsers(res.data));
+    const res = await axios
+      .get(
+        `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env
+          .REACT_APP_GITHUB_CLIENT_SECRET}`
+      )
+      .then((res) => setUsers(res.data));
   }
   return (
     <div className="App">
