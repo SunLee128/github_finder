@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import GithubContext from './githubContext';
 import githubReducer from './githubReducer';
-import { SEARCH_USERS, SET_ALERT, SET_LOADING, GET_USER, GET_REPOS, CLEAR_USERS } from '../types';
+import { SEARCH_USERS, SET_LOADING, GET_USER, GET_REPOS, CLEAR_USERS } from '../types';
 
 const GithubState = (props) => {
   const initialState = {

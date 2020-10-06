@@ -1,4 +1,4 @@
-import { SEARCH_USERS, SET_ALERT, SET_LOADING, GET_USER, GET_REPOS, CLEAR_USERS } from '../types';
+import { SEARCH_USERS, SET_LOADING, GET_USER, GET_REPOS, CLEAR_USERS } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
