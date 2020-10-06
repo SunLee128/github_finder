@@ -1,10 +1,13 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import GithubContext from '../../context/github/githubContext.js';
 
-const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
+const User = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+  const { getUser, loading, user, getUserRepos, repos } = githubContext;
+
   useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
@@ -17,14 +20,13 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
     avatar_url,
     location,
     bio,
-    blog,
     login,
     html_url,
     followers,
     following,
     public_repos,
     public_gists,
-  } = this.props.user;
+  } = user;
 
   if (loading) return <Spinner />;
   return (
@@ -36,7 +38,7 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
         <div className="all-center">
           <img src={avatar_url} className="round-img" alt="" style={{ width: '150px' }} />
           <h1>{name}</h1>
-          <p>{Location}</p>
+          <p>Location: {location}</p>
         </div>
         <div>
           {bio && (
@@ -53,7 +55,7 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
               {login && (
                 <Fragment>
                   <strong>Username: </strong>
-                  {name}
+                  {login}
                 </Fragment>
               )}
             </li>
@@ -71,19 +73,12 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
       <div className="card text-center">
         <div className="badge badge-primary">Followers: {followers}</div>
         <div className="badge badge-primary">Following: {following}</div>
-        <div className="badge badge-primary">Public repos: {followers}</div>
-        <div className="badge badge-primary">Followers: {followers}</div>
+        <div className="badge badge-primary">Public repos: {public_repos}</div>
+        <div className="badge badge-primary">Public Gists: {public_gists}</div>
       </div>
       <Repos repos={repos} />
     </Fragment>
   );
 };
 
-User.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired,
-};
 export default User;
